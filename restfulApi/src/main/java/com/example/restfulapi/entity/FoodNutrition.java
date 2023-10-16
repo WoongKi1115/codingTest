@@ -17,39 +17,19 @@ public class FoodNutrition {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String sampleId;
-
     private String foodCode;
 
     private String groupName;
 
-    private String commercialProduct;
-
     private String foodName;
 
-    private String researchYear;
+    private int researchYear;
 
     private String makerName;
 
-    private String harvestTime;
-
-    private String foodMajorCategory;
-
-    private String foodMinerCategory;
-
     private int servingSize;
 
-    private String unit;
-
-    @Column(name = "total_content(g)")
-    private Long totalContentG;
-
-    @Column(name = "total_content(ml)")
-    private Long totalContentMl;
-
     private double calorie;
-
-    private double water;
 
     private double protein;
 
@@ -59,33 +39,7 @@ public class FoodNutrition {
 
     private double sugers;
 
-    private double saccharose;
-
-    private double glucose;
-
-    private double fruitSuger;
-
-    private double lactose;
-
-    private double maltose;
-
-    private double dietaryFiber;
-
-    private double calcium;
-
-    private double ironContent;
-
-    private double magnesium;
-
-    private double phosphorus;
-
-    private double potassium;
-
     private double salt;
-
-    private double zinc;
-
-    private double copper;
 
     private double cholesterol;
 
@@ -94,5 +48,29 @@ public class FoodNutrition {
     private double transFat;
 
     private String refName;
+
+    public static FoodNutrition of(String foodCode, String groupName, String foodName, int researchYear, String makerName,
+                                   int servingSize, double calorie, double protein, double province, double carbohydrate,
+                                   double sugers, double salt, double cholesterol, double saturatedFattyAcids, double transFat,
+                                String refName) {
+        return FoodNutrition.builder()
+                .foodCode(foodCode)
+                .groupName(groupName)
+                .foodName(foodName)
+                .researchYear(researchYear)
+                .makerName(makerName)
+                .servingSize(servingSize)
+                .calorie(calorie)
+                .protein(protein)
+                .province(province)
+                .carbohydrate(carbohydrate)
+                .sugers(sugers)
+                .salt(salt)
+                .cholesterol(cholesterol)
+                .saturatedFattyAcids(saturatedFattyAcids)
+                .transFat(transFat)
+                .refName(refName)
+                .build();
+    }
 }
 

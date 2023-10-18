@@ -17,6 +17,7 @@ public class FoodNutrition {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(unique = true)
     private String foodCode;
 
     private String groupName;

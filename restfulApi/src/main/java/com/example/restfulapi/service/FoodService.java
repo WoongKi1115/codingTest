@@ -1,7 +1,10 @@
 package com.example.restfulapi.service;
 
+import com.example.restfulapi.dto.RequestFoodSearchDto;
 import com.example.restfulapi.entity.FoodNutrition;
+import com.example.restfulapi.entity.QFoodNutrition;
 import com.example.restfulapi.repository.FoodRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -16,10 +19,11 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-//@Transactional(readOnly = true)
+@Transactional(readOnly = true)
 public class FoodService {
 
     private final FoodRepository foodRepository;
+    private final JPAQueryFactory queryFactory;
 
     /**
      * db에 엑셀 데이터 저장
@@ -129,9 +133,25 @@ public class FoodService {
                 foodRepository.save(food);
             }
         } catch (IOException | InvalidFormatException e) {
-            e.printStackTrace(); // 예외 정보 출력
+            e.printStackTrace();
         }
     }
 
 
+    /**
+     * 식품 검색
+     * @param dto
+     * @return
+     */
+    public FoodNutrition searchData(RequestFoodSearchDto dto) {
+        QFoodNutrition food = QFoodNutrition.foodNutrition;
+        FoodNutrition foodNutrition = queryFactory.selectFrom(food)
+                .where(food.foodName.eq(dto.getFoodName())
+                        .and(food.researchYear.eq(Integer.parseInt(dto.getResearchYear())))
+                        .and(food.makerName.eq(dto.getMakerName()))
+                        .and(food.foodCode.eq(dto.getFoodCode())))
+                .fetchOne();
+        return foodNutrition;
+
+    }
 }

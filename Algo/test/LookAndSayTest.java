@@ -11,10 +11,10 @@ class LookAndSayTest {
     void findLn() {
         Map<Integer, String> map = new HashMap<>();
 
-        String result1 = LookAndSay.findLn(5, map);
+        String result1 = LookAndSayDP.findLn(5, map);
         assertEquals("111221", result1);
 
-        String result2 = LookAndSay.findLn(8, map);
+        String result2 = LookAndSayDP.findLn(8, map);
         assertEquals("1113213211", result2);
     }
 

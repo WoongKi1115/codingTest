@@ -4,14 +4,18 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LookAndSay {
-    public static String findLn(int n) {
+public class LookAndSayDP {
+    public static String findLn(int n, Map<Integer, String> map) {
         if (n == 1) {
             return "1";
         }
 
-        String beforeLn = findLn(n-1); // 직전의 수열을 가져오기 위한 재귀
+        // 가져올 값이 map 안에 저장되어 있다면 return
+        if (map.containsKey(n)) {
+            return map.get(n);
+        }
 
+        String beforeLn = findLn(n-1, map); // 직전의 수열을 가져오기 위한 재귀
         StringBuilder sb = new StringBuilder();
         int cnt = 1;
 
@@ -28,6 +32,7 @@ public class LookAndSay {
         }
         sb.append(cnt);
         sb.append(beforeLn.charAt(beforeLn.length()-1));
+        map.put(n, sb.toString());
         return sb.toString();
     }
 
@@ -46,9 +51,8 @@ public class LookAndSay {
                 break;
             }
         }
-
-        // 출력 값의 형식을 맞춰주기 위한 로직
-        String line = findLn(n);
+        Map<Integer, String> map = new HashMap<>(); // 기존의 값들을 저장하고 불러오기 위한 map
+        String line = findLn(n, map);
         int len = line.length()/2;
         StringBuilder sb = new StringBuilder();
         sb.append(line.charAt(len-1));

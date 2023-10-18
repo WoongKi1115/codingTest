@@ -144,6 +144,7 @@ public class FoodService {
      * @return
      */
     public FoodNutrition searchData(RequestFoodSearchDto dto) {
+        // querydsl을 활용해서 조건에 맞는 foodNutrition data 찾아옴.
         QFoodNutrition food = QFoodNutrition.foodNutrition;
         FoodNutrition foodNutrition = queryFactory.selectFrom(food)
                 .where(food.foodName.eq(dto.getFoodName())

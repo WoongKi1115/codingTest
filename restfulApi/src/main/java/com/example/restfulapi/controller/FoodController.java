@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
-@RequestMapping("/")
+@RequestMapping("/foods")
 @RequiredArgsConstructor
 public class FoodController {
     private final FoodService foodService;
@@ -31,7 +31,7 @@ public class FoodController {
      * @param dto
      * @return
      */
-    @PostMapping("/search")
+    @PostMapping("/nutritions")
     ResponseEntity<FoodNutrition> searchData(@RequestBody RequestFoodSearchDto dto) {
         return ResponseEntity.status(HttpStatus.OK).body(foodService.searchData(dto));
     }
